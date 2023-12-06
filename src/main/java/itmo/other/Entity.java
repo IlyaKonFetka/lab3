@@ -1,9 +1,9 @@
-package itmo;
+package itmo.other;
 
 import java.util.Objects;
 
-public abstract class Entity {
-    private String name;
+public abstract class Entity { // Что-либо осязаемое
+    protected String name;
 
     public Entity(String name) {
         this.name = name;
