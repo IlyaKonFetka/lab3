@@ -1,5 +1,2 @@
-package itmo.interfaces;
-
-public interface Locationable {
-    
+package itmo.interfaces;public class Locationable {
 }
