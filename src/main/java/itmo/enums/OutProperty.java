@@ -1,6 +1,8 @@
 package itmo.enums;
 
-public enum Property {
+import itmo.interfaces.SuperProperty;
+
+public enum OutProperty implements SuperProperty {
     DEAD("мертвый"),
     ALIVE("живой"),
     INJURED("раненый"),
@@ -15,7 +17,12 @@ public enum Property {
     ;
     public final String letter;
 
-    Property(String letter) {
+    OutProperty(String letter) {
         this.letter = letter;
+    }
+
+    @Override
+    public String toString(){
+        return this.letter;
     }
 }
