@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+class Human
+class Animal
+class Creature
+class HumanWithPropeller
+class Item
+class Entity
+
+enum Gender
+enum Location
+enum Mood
+enum Property
+
+Interface Locationable
+Interface Moodable
+Interface Propertyable
+Interface Sayable
+
+Gender *-- Creature
+Location *-- Creature
+Mood *--- Human
+Property *-- Creature
+Property *-- Item
+
+Sayable <|... Human
+Locationable <|.. Creature
+Propertyable <|.. Creature
+Moodable <|... Human
+Propertyable <|-- Item
+Locationable <|.. Item
+
+Entity <|-- Creature
+Creature <|-- Human
+Creature <|-- Animal
+Human <|-- HumanWithPropeller
+Entity <|-- Item
+
+
+
+@enduml
