@@ -11,6 +11,8 @@ public class HumanWithPropeller extends Human{
 
     public static final String typeName = "'Human with propeller'";
 
+    private int amountOfJam; //min = 0 max = 100
+
     public HumanWithPropeller(String name, Gender gender) {
         super(name, gender);
     }
@@ -54,6 +56,31 @@ public class HumanWithPropeller extends Human{
                 locationTo + "."
                 );
     }
+    public void refuelJam(int plusJam){
+        this.amountOfJam = plusJam > 100 - this.amountOfJam?100:this.amountOfJam + plusJam;
+        System.out.println(
+                        "Объект " +
+                        typeName  + " " +
+                        this.name +
+                        " заправился вареньем до уровня " +
+                        this.amountOfJam + "."
+        );
+    }
+    public void wasteJam(int minusJam){
+        this.amountOfJam = minusJam > this.amountOfJam?0:this.amountOfJam - minusJam;
+        System.out.println(
+                        "Объект " +
+                        typeName  + " " +
+                        this.name +
+                        " потратил варенье до уровня " +
+                        this.amountOfJam + "."
+        );
+    }
+    public int getAmountOfJam() {
+        return amountOfJam;
+    }
 
-
+    public void setAmountOfJam(int amountOfJam) {
+        this.amountOfJam = amountOfJam;
+    }
 }

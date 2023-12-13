@@ -195,7 +195,7 @@ public abstract class Creature extends Entity implements Locationable, Propertya
     public void upPower(int powerUp) {
         this.power += powerUp;
         System.out.println(
-                "Объект " +
+                        "Объект " +
                         this.getTypeName() + " " +
                         this.name + " " +
                         "увеличил физическую силу до " +
@@ -205,7 +205,7 @@ public abstract class Creature extends Entity implements Locationable, Propertya
     public void downPower(int powerDown){
         this.power = Math.max(this.power - powerDown, 1);
         System.out.println(
-                "Объект " +
+                        "Объект " +
                         this.getTypeName() + " " +
                         this.name + " " +
                         "уменьшил физическую силу до " +
