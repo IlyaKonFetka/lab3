@@ -22,6 +22,16 @@ public class Life {
                 Location.HOME,
                 Mood.CALM,
                 Gender.MALE,
+                8020,
+                123456,
+                "Россия",
+                "Башкортостан",
+                "Уфа",
+                2005,
+                1,
+                1,
+                "Малышевич",
+                null,
                 OutProperty.ALIVE, OutProperty.UNBROKEN
                 );
         HumanWithPropeller karlson = new HumanWithPropeller(
@@ -35,6 +45,17 @@ public class Life {
                 Location.HOME,
                 Mood.CALM,
                 Gender.MALE,
+                0,
+                0,
+                "Россия",
+                "Башкортостан",
+                "Уфа",
+                1990,
+                19,
+                1,
+                "Карлсонович",
+                null,
+                20,
                 OutProperty.ALIVE,OutProperty.UNBROKEN
         );
         malysh.addProperties(InProperty.DISSENTING);

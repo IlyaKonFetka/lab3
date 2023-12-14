@@ -9,9 +9,13 @@ import itmo.interfaces.SuperProperty;
 import javax.management.timer.Timer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Creature extends Entity implements Locationable, Propertyable {
+
     public static final String typeName = "'Creature'";
+
+
     private int health;     // min = 0 max = 100
     private int stamina;    // min = 0 max = 100
     private int hunger;     // min = 0 max = 100
@@ -135,61 +139,60 @@ public abstract class Creature extends Entity implements Locationable, Propertya
     public int getHunger(){
         return this.health;
     }
-
     public int getPower() {
         return power;
     }
-
     public void setHealth(int health) {
         this.health = health;
     }
-
     public void setStamina(int stamina) {
         this.stamina = stamina;
     }
-
     public int getStamina(){
         return this.stamina;
     }
-
     public void setHunger(int hunger) {
         this.hunger = hunger;
     }
-
     public int getAge() {
         return age;
     }
-
     public void setAge(int age) {
         this.age = age;
     }
-
     public void setPower(int power) {
         this.power = power;
     }
-
     public Location getPreviousLocation() {
         return previousLocation;
     }
-
     public void setPreviousLocation(Location previousLocation) {
         this.previousLocation = previousLocation;
     }
-
     public Location getLocation() {
         return location;
     }
-
     public void setLocation(Location location) {
         this.location = location;
     }
-
     public ArrayList<SuperProperty> getProperties() {
         return properties;
     }
-
     public void setProperties(ArrayList<SuperProperty> properties) {
         this.properties = properties;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Creature creature)) return false;
+        if (!super.equals(o)) return false;
+        return getAge() == creature.getAge();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getAge());
     }
 
     public void upPower(int powerUp) {
@@ -200,6 +203,15 @@ public abstract class Creature extends Entity implements Locationable, Propertya
                         this.name + " " +
                         "увеличил физическую силу до " +
                         this.power + "единиц.");
+    }
+
+    @Override
+    public String toString() {
+        return "Creature{" +
+                "age=" + age +
+                ", location=" + location +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     public void downPower(int powerDown){

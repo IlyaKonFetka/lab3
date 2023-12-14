@@ -31,8 +31,20 @@ public class HumanWithPropeller extends Human{
                               Location location,
                               Mood mood,
                               Gender gender,
-                              SuperProperty...properties) {
-        super(name, health, stamina, hunger, age, power, previousLocation, location, mood, gender,properties);
+                              int series,
+                              int number,
+                              String country,
+                              String region,
+                              String city,
+                              int year,
+                              int month,
+                              int date,
+                              String surname,
+                              ArrayList<Human> children,
+                              int amountOfJam,
+                              SuperProperty... properties) {
+        super(name, health, stamina, hunger, age, power, previousLocation, location, mood, gender, series, number, country, region, city, year, month, date, surname, children, properties);
+        this.amountOfJam = amountOfJam;
     }
 
     public void flyUp(){
@@ -83,4 +95,5 @@ public class HumanWithPropeller extends Human{
     public void setAmountOfJam(int amountOfJam) {
         this.amountOfJam = amountOfJam;
     }
+
 }

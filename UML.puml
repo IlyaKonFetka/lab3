@@ -7,6 +7,17 @@ class Human{
     +shareMood
     +changeMood
 }
+class Passport{
+    -int series;
+    -int number;
+    -String country;
+    -String region;
+    -String city;
+    -Date dateOfBorn;
+    -String name;
+    -String surname;
+    -ArrayList<Human>children;
+}
 abstract class Animal
 abstract class Creature{
     -int health
@@ -67,6 +78,8 @@ InProperty *-- Creature
 InProperty *-- Item
 OutProperty *-- Creature
 OutProperty *-- Item
+
+Human *-- Passport
 
 Entityable <|.. Entity
 Locationable <|.. Creature
