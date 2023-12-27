@@ -10,6 +10,7 @@ public class Human extends Creature {
 
     public static final String typeName = "'Human'";
 
+    private int degreeOfAgreement; // min = 0 max = 100
     private Mood mood;
     private Passport passport;
 
@@ -21,6 +22,8 @@ public class Human extends Creature {
                  Gender gender,
                  Location previousLocation,
                  Location location,
+                 int degreeOfAgreement,
+                 Mood mood,
                  Property... properties) {
         super(name, previousLocation, location, gender, properties);
         this.passport = new Passport(
@@ -29,7 +32,8 @@ public class Human extends Creature {
                 dateOfBorn,
                 birthPlace,
                 name);
-
+        this.degreeOfAgreement = degreeOfAgreement;
+        this.mood = mood;
     }
 
     public class Passport{
@@ -142,7 +146,17 @@ public class Human extends Creature {
     public String getTypeName() {
         return typeName;
     }
-
+    public void changeDegreeOfAgreement(int degreeOfAgreementTo){
+        System.out.print(
+                "Объект " +
+                        typeName  + " " +
+                        this.name);
+        System.out.print(degreeOfAgreementTo>=this.degreeOfAgreement?" повысил ":" понизил ");
+        System.out.println("степень согласия до " +
+                degreeOfAgreementTo +
+                " процентов.");
+        this.degreeOfAgreement = degreeOfAgreementTo;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

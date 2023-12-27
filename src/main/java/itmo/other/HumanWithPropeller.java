@@ -20,6 +20,8 @@ public class HumanWithPropeller
                               Gender gender,
                               Location previousLocation,
                               Location location,
+                              int degreeOfAgreement,
+                              Mood mood,
                               Property... properties) {
         super(series,
                 number,
@@ -29,6 +31,8 @@ public class HumanWithPropeller
                 gender,
                 previousLocation,
                 location,
+                degreeOfAgreement,
+                mood,
                 properties);
     }
 

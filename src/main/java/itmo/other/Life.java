@@ -16,6 +16,8 @@ public class Life {
                 Gender.MALE,
                 null,
                 Location.HOME,
+                50,
+                Mood.NORMAL,
                 Property.ALIVE, Property.UNBROKEN
         );
         HumanWithPropeller karlson = new HumanWithPropeller(
@@ -27,9 +29,11 @@ public class Life {
                 Gender.MALE,
                 null,
                 Location.HOME,
+                50,
+                Mood.NORMAL,
                 Property.ALIVE, Property.UNBROKEN);
-
-        malysh.changeMood(Mood.SELF_CONFIDENT);
+        malysh.changeDegreeOfAgreement(0);
+        malysh.changeMood(Mood.CAPRICIOUS);
         karlson.changeMood(Mood.ANGRY);
         karlson.flyTo(Location.HOUSE_ON_THE_ROOF);
         for(int i = 0; i < 2; i++) malysh.say("Прилетай скорей!",karlson);

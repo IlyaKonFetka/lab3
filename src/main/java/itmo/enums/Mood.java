@@ -4,7 +4,8 @@ public enum Mood {
     NORMAL("нормальное"),
     ANGRY("злое"),
     CALM("спокойное"),
-    SELF_CONFIDENT("уверенный")
+    SELF_CONFIDENT("уверенное"),
+    CAPRICIOUS("своенравное"),
     ;
     public final String letter;
 

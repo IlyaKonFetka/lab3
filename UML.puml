@@ -3,9 +3,10 @@
 class Human{
     -Mood mood;
     -Passport passport
-    +say
-    +shareMood
-    +changeMood
+    -int degreeOfAgreement
+    +say()
+    +shareMood()
+    +changeMood()
 }
 class Passport{
     -int series;
