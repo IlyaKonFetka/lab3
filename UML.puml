@@ -2,7 +2,7 @@
 'https://plantuml.com/sequence-diagram
 class Human{
     -Mood mood;
-    -Gender gender;
+    -Passport passport
     +say
     +shareMood
     +changeMood
@@ -10,50 +10,24 @@ class Human{
 class Passport{
     -int series;
     -int number;
-    -String country;
-    -String region;
-    -String city;
     -Date dateOfBorn;
+    -Country birthPlace
     -String name;
-    -String surname;
-    -ArrayList<Human>children;
 }
-abstract class Animal
 abstract class Creature{
-    -int health
-    -int stamina
-    -int hunger
-    -int age
-    -int power
-    -Location previousLocation
-    -Location location
-    -ArrayList<SuperProperty> properties
-    +downPower()
-    +upPower()
-    +toHunger()
-    +eat()
-    +downStamina()
-    +upStamina()
-    +takeDamage()
-    +takeTreatment()
-    +plusAge()
+    #Stirng name
+    #Location previousLocation
+    #Location location
+    #ArrayList<Property> properties
+    #Gender gender
 }
 class HumanWithPropeller{
-    -int amountOfJam
-    +flyUp()
-    +flyTo()
-    +refuelJam()
-    +wasteJam()
 }
-abstract class Item
-abstract class Entity{
-    #String name
-}
+enum Country
 enum Gender
 enum Location
 enum Mood
-enum InProperty
-enum OutProperty
+enum Property
 
 Interface Locationable{
     void changeLocation
@@ -69,30 +43,25 @@ Interface Propertyable{
     removeProperties()
     addProperties()
 }
-Interface SuperProperty
+Interface Flyable{
+    flyTo()
+}
 
 Gender *-- Creature
 Location *-- Creature
 Mood *--- Human
-InProperty *-- Creature
-InProperty *-- Item
-OutProperty *-- Creature
-OutProperty *-- Item
+Country *--- Human
+Property *-- Creature
 
 Human *-- Passport
 
-Entityable <|.. Entity
 Locationable <|.. Creature
-Propertyable <|... Item
-Locationable <|... Item
-SuperProperty <|..InProperty
-SuperProperty <|..OutProperty
 Propertyable <|.. Creature
+Entityable <|.. Creature
+Flyable <|.... HumanWithPropeller
 
-Entity <|-- Creature
 Creature <|-- Human
-Creature <|-- Animal
 Human <|-- HumanWithPropeller
-Entity <|-- Item
 
+class Life
 @enduml

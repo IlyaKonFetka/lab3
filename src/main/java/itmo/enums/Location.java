@@ -2,7 +2,6 @@ package itmo.enums;
 
 public enum Location {
     HOME("дом"),
-    STREET("улица"),
     HOUSE_ON_THE_ROOF("домик на крыше"),
     COOK_TABLE("обеденный стол"),
     MOTHERS_WOMB("утроб матери"),

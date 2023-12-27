@@ -1,12 +1,12 @@
 package itmo.interfaces;
 
-import itmo.enums.OutProperty;
+import itmo.enums.Property;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public interface Propertyable extends Entityable{
-    default void addProperties(SuperProperty... varArgProperties) {
+    default void addProperties(Property... varArgProperties) {
         this.getProperties().addAll(List.of(varArgProperties));
         System.out.print(
                         "Объекту " +
@@ -19,7 +19,7 @@ public interface Propertyable extends Entityable{
         }
         System.out.println(".");
     }
-    default void removeProperties(SuperProperty... varArgProperties) {
+    default void removeProperties(Property... varArgProperties) {
         this.getProperties().removeAll(List.of(varArgProperties));
         System.out.print(
                         "Объект " +
@@ -33,7 +33,7 @@ public interface Propertyable extends Entityable{
         }
         System.out.println(".");
     }
-    default void updateProperties(SuperProperty... varArgProperties) {
+    default void updateProperties(Property... varArgProperties) {
         this.cleanProperties();
         this.addProperties(varArgProperties);
     }
@@ -48,6 +48,6 @@ public interface Propertyable extends Entityable{
     }
 
 
-    ArrayList<SuperProperty> getProperties();
-    void setProperties(ArrayList<SuperProperty> properties);
+    ArrayList<Property> getProperties();
+    void setProperties(ArrayList<Property> properties);
 }

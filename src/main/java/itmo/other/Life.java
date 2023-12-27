@@ -1,64 +1,34 @@
 package itmo.other;
 
 import itmo.enums.*;
-import itmo.interfaces.SuperProperty;
 
-import javax.tools.DocumentationTool;
-import java.awt.*;
-import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Life {
     public static void main(String[] args){
-        List list = new List();
-        list.add(String.valueOf(OutProperty.ALIVE));
         Human malysh = new Human(
-                "Малыш",
-                100,
-                80,
-                80,
-                12,
-                10,
-                null,
-                Location.HOME,
-                Mood.CALM,
-                Gender.MALE,
                 8020,
                 123456,
-                "Россия",
-                "Башкортостан",
-                "Уфа",
-                2005,
-                1,
-                1,
-                "Малышевич",
-                null,
-                OutProperty.ALIVE, OutProperty.UNBROKEN
-                );
-        HumanWithPropeller karlson = new HumanWithPropeller(
-                "Карлсон",
-                100,
-                99,
-                1,
-                33,
-                50,
+                new Date(2005, Calendar.AUGUST,29),
+                Country.RUSSIA,
+                "Малыш",
+                Gender.MALE,
                 null,
                 Location.HOME,
-                Mood.CALM,
-                Gender.MALE,
-                0,
-                0,
-                "Россия",
-                "Башкортостан",
-                "Уфа",
-                1990,
-                19,
-                1,
-                "Карлсонович",
-                null,
-                20,
-                OutProperty.ALIVE,OutProperty.UNBROKEN
+                Property.ALIVE, Property.UNBROKEN
         );
-        malysh.addProperties(InProperty.DISSENTING);
+        HumanWithPropeller karlson = new HumanWithPropeller(
+                8020,
+                321654,
+                new Date(1999,Calendar.APRIL,1),
+                Country.RUSSIA,
+                "Карлсон",
+                Gender.MALE,
+                null,
+                Location.HOME,
+                Property.ALIVE, Property.UNBROKEN);
+
         malysh.changeMood(Mood.SELF_CONFIDENT);
         karlson.changeMood(Mood.ANGRY);
         karlson.flyTo(Location.HOUSE_ON_THE_ROOF);

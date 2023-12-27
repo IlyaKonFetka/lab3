@@ -1,23 +1,12 @@
 package itmo.enums;
 
-import itmo.interfaces.SuperProperty;
-
-public enum OutProperty implements SuperProperty {
-    DEAD("мертвый"),
+public enum Property {
     ALIVE("живой"),
-    INJURED("раненый"),
-    COLD("холодный"),
-    FROZEN("замёрзший"),
-    HOT("жаркий"),
-    FIRE("горящий"),
-    BROKEN("сломанный"),
-    SCRATCHED("поцарананный"),
     UNBROKEN("невредимый"),
-    MELT("растаявший"),
     ;
     public final String letter;
 
-    OutProperty(String letter) {
+    Property(String letter) {
         this.letter = letter;
     }
 
