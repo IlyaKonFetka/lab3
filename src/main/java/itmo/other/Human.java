@@ -10,7 +10,7 @@ public class Human extends Creature {
 
     public static final String typeName = "'Human'";
 
-    private int degreeOfAgreement; // min = 0 max = 100
+    private int degreeOfAgreement; // min = 0 max = 100 //
     private Mood mood;
     private Passport passport;
 
