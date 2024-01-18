@@ -1,17 +1,9 @@
 package itmo.interfaces;
 
 import itmo.enums.Location;
+import itmo.exceptions.NegativeAmountOfJam;
 
-public interface Flyable extends Locationable,Entityable{
-    default void flyTo(Location locationTo){
-        this.setPreviousLocation(this.getLocation());
-        this.setLocation(locationTo);
-        System.out.println(
-                "Объект " +
-                        this.getTypeName()  + " " +
-                        this.getName() +
-                        " улетел в локацию " +
-                        locationTo + "."
-        );
-    }
+@FunctionalInterface
+public interface Flyable{
+     void flyTo(Location locationTo) throws NegativeAmountOfJam;
 }

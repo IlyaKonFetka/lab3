@@ -1,28 +1,34 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 class Human{
-    -Mood mood;
-    -Passport passport
-    -int degreeOfAgreement
-    +say()
-    +shareMood()
-    +changeMood()
+    Mood mood;
+    PersonalDocument
+    int degreeOfAgreement
+    say()
+    shareMood()
+    changeMood()
+}
+class PersonalDocument{
+    int series;
+    int number;
+    LocalDate dateOfBorn;
+    String name;
 }
 class Passport{
-    -int series;
-    -int number;
-    -Date dateOfBorn;
-    -Country birthPlace
-    -String name;
+    String militaryDuty;
+}
+class BirthCertificate{
+    Country placeOfBirth;
 }
 abstract class Creature{
-    #Stirng name
-    #Location previousLocation
-    #Location location
-    #ArrayList<Property> properties
-    #Gender gender
+    Stirng name
+    Location previousLocation
+    Location location
+    ArrayList<Property> properties
+    Gender gender
 }
 class HumanWithPropeller{
+    int amountOfJam;
 }
 enum Country
 enum Gender
@@ -30,13 +36,13 @@ enum Location
 enum Mood
 enum Property
 
+class Exception
+class NoPersonalDocumentException
+class NegativeAmountOfJam
+
 Interface Locationable{
     void changeLocation
     void comeBack
-}
-Interface Entityable{
-    getTypeName();
-    getName();
 }
 Interface Propertyable{
     cleanProperties()
@@ -54,15 +60,22 @@ Mood *--- Human
 Country *--- Human
 Property *-- Creature
 
-Human *-- Passport
+Human *-- PersonalDocument
 
 Locationable <|.. Creature
 Propertyable <|.. Creature
-Entityable <|.. Creature
 Flyable <|.... HumanWithPropeller
+Telegramable <|.. Telegram
 
+PersonalDocument <|-- Passport
+PersonalDocument <|-- BirthCertificate
 Creature <|-- Human
 Human <|-- HumanWithPropeller
-
+Exception <|-- NoPersonalDocumentException
+Exception <|-- NegativeAmountOfJam
 class Life
+class Telegram
+Interface Telegramable
+
+Human o-- Telegramable
 @enduml

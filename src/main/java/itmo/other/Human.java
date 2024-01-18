@@ -1,9 +1,11 @@
 package itmo.other;
 
 import itmo.enums.*;
+import org.w3c.dom.Text;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.io.File;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Objects;
 
 public class Human extends Creature {
@@ -12,113 +14,143 @@ public class Human extends Creature {
 
     private int degreeOfAgreement; // min = 0 max = 100 //
     private Mood mood;
-    private Passport passport;
+    private PersonalDocument pDocument;
 
-    public Human(int series,
-                 int number,
-                 Date dateOfBorn,
-                 Country birthPlace, //for example - Country
-                 String name,
+    public Human(String name, Location previousLocation, Location location, Gender gender, int degreeOfAgreement, Property... properties) {
+
+    }
+
+    public Human(String name,
                  Gender gender,
                  Location previousLocation,
                  Location location,
                  int degreeOfAgreement,
+                 int series,
+                 int number,
+                 int yearOfBirth,
+                 int monthOfBirth,
+                 int dayOfBirth,
+                 Country countryOfBirth,
+                 String militaryDuty,
                  Mood mood,
                  Property... properties) {
         super(name, previousLocation, location, gender, properties);
-        this.passport = new Passport(
-                series,
-                number,
-                dateOfBorn,
-                birthPlace,
-                name);
+        LocalDate dateOfBirth = LocalDate.of(yearOfBirth,monthOfBirth,dayOfBirth);
+        if(Period.between(LocalDate.now(),dateOfBirth).getYears() >= 14){
+            this.pDocument = new Passport(series,
+                    number,
+                    dateOfBirth,
+                    name,
+                    militaryDuty);
+        }else {
+            this.pDocument = new BirthCertificate(series,
+                    number,
+                    dateOfBirth,
+                    countryOfBirth,
+                    name);
+
+        }
         this.degreeOfAgreement = degreeOfAgreement;
         this.mood = mood;
     }
+    abstract public class PersonalDocument{
+        public final int series;
+        public final int number;
+        public final LocalDate dateOfBorn;
+        public final String name;
 
-    public class Passport{
-        private int series;
-        private int number;
-        private Date dateOfBorn;
-        private Country birthPlace;
-        private String name;
-
-
-        public Passport(int series,
-                        int number,
-                        Date dateOfBorn,
-                        Country birthPlace, //for example - Country
-                        String name
-        ) {
+        public PersonalDocument(int series, int number, LocalDate dateOfBorn, String name) {
             this.series = series;
             this.number = number;
             this.dateOfBorn = dateOfBorn;
-            this.birthPlace = birthPlace;
             this.name = name;
         }
 
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Passport passport = (Passport) o;
-            return (series == passport.series) &&
-                    (number == passport.number) &&
-                    Objects.equals(dateOfBorn, passport.dateOfBorn) &&
-                    Objects.equals(name, passport.name);
+            if (!(o instanceof PersonalDocument that)) return false;
+            return series == that.series && number == that.number && Objects.equals(name, that.name);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(series, number, dateOfBorn,name);
+            return Objects.hash(series, number, name);
+        }
+
+        @Override
+        public String toString() {
+            return "PersonalDocument{" +
+                    "series=" + series +
+                    ", number=" + number +
+                    ", dateOfBorn=" + dateOfBorn +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
+    }
+    public class Passport extends PersonalDocument{
+
+        public String militaryDuty;
+
+        public Passport(int series,
+                        int number,
+                        LocalDate dateOfBorn,
+                        String name,
+                        String militaryDuty
+        ) {
+            super(series, number, dateOfBorn, name);
+
+            this.militaryDuty = militaryDuty;
         }
 
         @Override
         public String toString() {
             return "Passport{" +
-                    "series=" + series +
-                    ", number=" + number +
-                    ", dateOfBorn=" + dateOfBorn +
-                    ", birthPlace=" + birthPlace +
+                    "militaryDuty='" + militaryDuty + '\'' +
+                    ", series=" + super.series +
+                    ", number=" + super.number +
+                    ", dateOfBorn=" + super.dateOfBorn +
+                    ", name='" + super.name + '\'' +
+                    '}';
+        }
+    }
+    public class BirthCertificate extends PersonalDocument{
+        public Country placeOfBirth;
+        public BirthCertificate(int series,
+                                int number,
+                                LocalDate dateOfBorn,
+                                Country birthPlace,
+                                String name
+                                ) {
+            super(series, number, dateOfBorn, name);
+            this.placeOfBirth = birthPlace;
+        }
+
+        @Override
+        public String toString() {
+            return "BirthCertificate{" +
+                    "placeOfBirth=" + placeOfBirth +
+                    ", series=" + super.series +
+                    ", number=" + super.number +
+                    ", dateOfBorn=" + super.dateOfBorn +
                     ", name='" + name + '\'' +
                     '}';
         }
     }
-
     public void changeMood(Mood moodTo) {
         this.mood = moodTo;
         System.out.println(
                 "Объект " +
-                typeName  + " " +
-                this.name +
+                this.getTypeName()  + " " +
+                this.getName() +
                 " сменил настроение на " +
                 this.mood + ".");
-    }
-
-    public void shareMood(Creature creatureTo) {
-        System.out.println(
-                "Объект " +
-                typeName  + " " +
-                this.name +
-                " поделился своим настроением с объектом " +
-                creatureTo.getTypeName()  + " " +
-                creatureTo.name + ": " +
-                this.mood + ".");
-    }
-
-    public void say(String replica) {
-        System.out.println(
-                "Объект " +
-                typeName  + " " +
-                this.name +
-                " произнёс: \"" +
-                replica + "\".");
     }
 
     public void say(String replica, Creature creature) {
         System.out.println(
                 "Объект " +
-                typeName  + " " +
+                this.getTypeName()  + " " +
                 this.name +
                 " произнёс объекту " +
                 creature.getTypeName() + " " +
@@ -126,30 +158,15 @@ public class Human extends Creature {
                 replica + "\".");
     }
 
-    public void say(String replica, Creature... creatures) {
-        System.out.print(
-                "Объект " +
-                typeName  + " " +
-                this.name +
-                " произнёс объектам ");
-        for (int i = 0; i < creatures.length; i++) {
-            System.out.print(creatures[i].getTypeName() + " " + creatures[i].name);
-            if (i != creatures.length - 1) System.out.print(", ");
-        }
-        System.out.println(
-                ": \"" +
-                replica +
-                "\".");
-    }
-
     @Override
     public String getTypeName() {
         return typeName;
     }
+
     public void changeDegreeOfAgreement(int degreeOfAgreementTo){
         System.out.print(
                 "Объект " +
-                        typeName  + " " +
+                        this.getTypeName()  + " " +
                         this.name);
         System.out.print(degreeOfAgreementTo>=this.degreeOfAgreement?" повысил ":" понизил ");
         System.out.println("степень согласия до " +
@@ -157,25 +174,70 @@ public class Human extends Creature {
                 " процентов.");
         this.degreeOfAgreement = degreeOfAgreementTo;
     }
+
+    public void losePersonalDocument() {
+        this.pDocument =  null;
+        System.out.println(
+                        "Объект " +
+                        this.getTypeName()  + " " +
+                        this.name +
+                        " потерял документ, удостоверяющий личность.");
+    }
+
+    public PersonalDocument getPersonalDocument() {
+        return pDocument;
+    }
+    private interface Telegramable{
+        String getMessage();
+        Human getHumanTo();
+        Country getCountryTo();
+    }
+    public Telegramable writeTheTelegram(Goods.PostageStamp postageStamp, File text, Country countryTo, Human humanTo){
+        class Telegram implements Telegramable{
+            public Goods.PostageStamp postageStamp;
+            private File message;
+            private Country countryTo;
+            private Human humanTo;
+
+            public Telegram(Goods.PostageStamp postageStamp, File message, Country countryTo, Human humanTo) {
+                this.postageStamp = postageStamp;
+                this.message = message;
+                this.countryTo = countryTo;
+                this.humanTo = humanTo;
+            }
+
+            @Override
+            public String getMessage() {
+                return "десериализованный текст";
+            }
+            @Override
+            public Human getHumanTo() {
+                return humanTo;
+            }
+            @Override
+            public Country getCountryTo() {
+                return countryTo;
+            }
+        }
+        return new Telegram(postageStamp,text,countryTo,humanTo);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Human human)) return false;
-        return Objects.equals(passport, human.passport);
+        return Objects.equals(pDocument, human.pDocument);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(passport);
+        return Objects.hash(pDocument);
     }
 
     @Override
     public String toString() {
         return "Human{" +
-                "name='" + name + '\'' +
+                "pDocument=" + pDocument +
                 ", gender=" + gender +
-                ", passport=" + passport +
-                ", name='" + name + '\'' +
                 '}';
     }
 }

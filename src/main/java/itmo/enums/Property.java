@@ -1,6 +1,6 @@
 package itmo.enums;
 
-public enum Property {
+public enum Property                            {
     ALIVE("живой"),
     UNBROKEN("невредимый"),
     ;
